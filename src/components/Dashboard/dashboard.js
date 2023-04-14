@@ -289,7 +289,7 @@ const Dashboard = () => {
   const getProfile = () => {
     // window.location.reload();
     const id = window.localStorage.getItem('id');
-    axios.get("http://localhost:8082/auth/specific_user/" + id)
+    axios.get("https://staging-bitly-be.mtechub.com/auth/specific_user/" + id)
       .then((response) => {
         if (response.data.result) {
           setProfileData(response.data.result[0])
@@ -301,7 +301,7 @@ const Dashboard = () => {
 
 
   const getTermAndConditions = () => {
-    axios.get("http://localhost:8082/terms_conditions/specific_terms_conditions")
+    axios.get("https://staging-bitly-be.mtechub.com/terms_conditions/specific_terms_conditions")
       .then((response) => {
         if (response.data.result) {
           setTermID(response.data.result[0].id);
@@ -315,7 +315,7 @@ const Dashboard = () => {
 
 
   const getPrivacyPolicy = () => {
-    axios.get("http://localhost:8082/privacy_policy/view_privacy_policy")
+    axios.get("https://staging-bitly-be.mtechub.com/privacy_policy/view_privacy_policy")
       .then((response) => {
         if (response.data.result) {
           setPrivacyID(response.data.result[0].id);
@@ -329,7 +329,7 @@ const Dashboard = () => {
 
   const getData = () => {
     const id = window.localStorage.getItem('id');
-    axios.get("http://localhost:8082/auth/all_users")
+    axios.get("https://staging-bitly-be.mtechub.com/auth/all_users")
       .then((response) => {
         if (response.data.result) {
           setLinksData(response.data.result)
@@ -340,7 +340,7 @@ const Dashboard = () => {
   }
 
   const HandleDelete = () => {
-    axios.delete("http://localhost:8082/links/delete_link/" + id)
+    axios.delete("https://staging-bitly-be.mtechub.com/links/delete_link/" + id)
       .then((response) => {
         if (response.data.result) {
           handleCloseDleteConfirmation();
@@ -391,7 +391,7 @@ const Dashboard = () => {
       shortenLink: shortenlink,
       status: status
     }
-    axios.put("http://localhost:8082/links/update_link", data)
+    axios.put("https://staging-bitly-be.mtechub.com/links/update_link", data)
       .then((response) => {
         if (response.data.result) {
           
@@ -436,7 +436,7 @@ const Dashboard = () => {
         const res = await axios(`https://api.shrtco.de/v2/shorten?url=${link}${title}`);
         setShortenLink(res.data.result.full_short_link);
 
-        axios.post("http://localhost:8082/links/add_link", data)
+        axios.post("https://staging-bitly-be.mtechub.com/links/add_link", data)
           .then((response) => {
             if (response.data.result) {
               setMessage("Success");
@@ -465,7 +465,7 @@ const Dashboard = () => {
       title: "Term And Conditions",
       content: updatedTerm,
     }
-    axios.put("http://localhost:8082/terms_conditions/update_terms_conditions", data)
+    axios.put("https://staging-bitly-be.mtechub.com/terms_conditions/update_terms_conditions", data)
       .then((response) => {
         if (response.data.result) {
           handleOpen();
@@ -488,7 +488,7 @@ const Dashboard = () => {
       content: updatedPrivacy,
     }
     console.log(data);
-    axios.put("http://localhost:8082/privacy_policy/update_privacy_policy", data)
+    axios.put("https://staging-bitly-be.mtechub.com/privacy_policy/update_privacy_policy", data)
       .then((response) => {
         console.log(response);
         if (response.data.result) {
@@ -516,7 +516,7 @@ const Dashboard = () => {
       status: 'show'
     }
     console.log(data);
-    axios.post("http://localhost:8082/qr_code/add_qr_code", data)
+    axios.post("https://staging-bitly-be.mtechub.com/qr_code/add_qr_code", data)
       .then((response) => {
         if (response.data.result) {
           // setMessage('Success');
@@ -552,7 +552,7 @@ const Dashboard = () => {
             newPassword: password,
           }
           console.log(user);
-          axios.put("http://localhost:8082/auth/resetPassword", user)
+          axios.put("https://staging-bitly-be.mtechub.com/auth/resetPassword", user)
             .then((response) => {
               if (response.data.message === "Password Changed Successfully") {
                 setMessage("Success");
@@ -572,7 +572,7 @@ const Dashboard = () => {
   }
 
   const HandleDeleteUser = (id) => {
-    axios.delete("http://localhost:8082/auth/delete_user/" + id)
+    axios.delete("https://staging-bitly-be.mtechub.com/auth/delete_user/" + id)
       .then((response) => {
         if (response.data.message === "User Deleted Successfully!") {
           setMessage("Success");

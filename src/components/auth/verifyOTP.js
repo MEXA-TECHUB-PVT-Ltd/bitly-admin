@@ -51,7 +51,7 @@ const VerificationCode = () => {
     if (otp === '') {
       setOTPError("OTP is Empty");
     } else {
-      axios.post("http://localhost:8082/auth/verifyOTP", user)
+      axios.post("https://staging-bitly-be.mtechub.com/auth/verifyOTP", user)
         .then((response) => {
           if (response.data.result) {
             setMessage("Success");

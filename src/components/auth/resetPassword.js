@@ -72,7 +72,7 @@ const ResetPassword = () => {
                     password:oldPassword,
                     newPassword: password,
                 }            
-                axios.post("http://localhost:8082/auth/resetPassword", user)
+                axios.post("https://staging-bitly-be.mtechub.com/auth/resetPassword", user)
                     .then((response) => {
                         if (response.data.result) {
                             setMessage("Success");
