@@ -62,7 +62,7 @@ const SignUp = () => {
         } else if (regex.test(email) === false) {
             setEmailError("Email is not valid");
         } else if (username !== '' && email !== '' && password !== '') {
-            axios.post("http://localhost:8082/auth/sign_up", user)
+            axios.post("https://staging-bitly-be.mtechub.com/auth/sign_up", user)
                 .then((response) => {
                     console.log(response.data);
                     if (response.data.result) {

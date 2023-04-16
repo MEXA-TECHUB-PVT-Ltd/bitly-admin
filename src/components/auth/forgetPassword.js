@@ -33,7 +33,7 @@ const ForgetPassword = () => {
             setEmailError("Email is not valid");
         } else if (email !== '') {
             navigate('/Verify_OTP', { state: { email: email } });
-            axios.post("http://localhost:8082/auth/verifyEmail", user)
+            axios.post("https://staging-bitly-be.mtechub.com/auth/verifyEmail", user)
                 .then((response) => {
                     console.log(response);
                     if (response.data.data) {
