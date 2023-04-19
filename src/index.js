@@ -1,30 +1,41 @@
-import { createRoot } from 'react-dom/client';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
 
-// third party
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-
-// project imports
-// import * as serviceWorker from 'serviceWorker';
-import App from 'App';
-import { store } from 'store';
-
-// style + assets
-import 'assets/scss/style.scss';
-
-// ==============================|| REACT DOM RENDER  ||============================== //
-
-const container = document.getElementById('root');
-const root = createRoot(container); // createRoot(container!) if you use TypeScript
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from './components/auth/login';
+import ProtectedRoutes from './protectedRoutes';
+import ForgetPassword from './components/auth/forgetPassword';
+import ResetPassword from './components/auth/resetPassword';
+import Signup from './components/auth/signup';
+import Dashboard from './components/Dashboard/dashboard';
+import QRCodeDashboard from './components/Dashboard/QRCodeDashboard';
+import VerifyOTP from './components/auth/verifyOTP';
+import Upgrade from './components/Dashboard/upgrade/upgrade';
+import Help from './components/Dashboard/help/help';
+import { Navigate } from 'react-router-dom';
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </Provider>
-);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();
+    <BrowserRouter>
+      <Routes>
+      <Route path='/' element={window.localStorage.getItem('id') !==null ? <Navigate to="/dashboard" /> : <App />} />
+        <Route path='/login' element={window.localStorage.getItem('id') !==null ? <Navigate to="/dashboard" /> : <Login />} />
+
+        <Route path="/signUp" element={<Signup />} />
+        <Route path="/forgetPassword" element={<ForgetPassword />} />
+        <Route path="/Verify_OTP" element={<VerifyOTP />} />
+        <Route path="/resetPassword" element={<ResetPassword />} />
+
+        <Route element={<ProtectedRoutes auth={window.localStorage.getItem('id')!==null}/>}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/QRCodeDashboard" element={<QRCodeDashboard />} />
+        <Route path="/Upgrade" element={<Upgrade />} />
+        <Route path="/Help" element={<Help />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+
+);
