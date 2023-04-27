@@ -15,7 +15,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Lottie from "lottie-react";
 import groovyWalkAnimation from "./data.json";
 import warning from "./warning.json";
-
+import { BaseUrl } from "BaseURL";
 // material-ui
 import { Grid } from '@mui/material';
 
@@ -43,7 +43,7 @@ const SamplePage = () => {
 
   const [linkData, setLinksData] = React.useState([]);
   const HandleDeleteUser = () => {
-    axios.delete("https://staging-bitly-be.mtechub.com/auth/delete_user/" + deleteID)
+    axios.delete(BaseUrl+"auth/delete_user/" + deleteID)
       .then((response) => {
         if (response.data.message === "User Deleted Successfully!") {
           setMessage("Success");
@@ -59,7 +59,7 @@ const SamplePage = () => {
 
   const getData = () => {
     setLoading(true);
-    axios.get("https://staging-bitly-be.mtechub.com/auth/all_users")
+    axios.get(BaseUrl+"auth/all_users")
       .then((response) => {
         setLoading(false);
         if (response.data.result) {

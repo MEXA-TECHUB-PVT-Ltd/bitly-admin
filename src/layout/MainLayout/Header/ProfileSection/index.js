@@ -4,6 +4,7 @@ import axios from "axios";
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import LockIcon from '@mui/icons-material/Lock';
+import { BaseUrl } from "BaseURL";
 
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
@@ -108,7 +109,7 @@ const ProfileSection = () => {
                         newPassword: password,
                     }
                     setLoading('please wait...');
-                    axios.put("https://staging-bitly-be.mtechub.com/auth/resetPassword", user)
+                    axios.put(BaseUrl+"auth/resetPassword", user)
                         .then((response) => {
                             setLoading('');
                             if (response.data.message === "Password Changed Successfully") {
