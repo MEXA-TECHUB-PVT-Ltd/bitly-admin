@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Radium, { StyleRoot } from 'radium';
 import { fadeIn } from 'react-animations';
-
+import { BaseUrl } from "BaseURL";
 import InputAdornment from '@mui/material/InputAdornment';
 import { useNavigate } from 'react-router-dom';
 import mainLogo from './mainLogo.png'
@@ -33,7 +33,7 @@ const ForgetPassword = () => {
             setEmailError("Email is not valid");
         } else if (email !== '') {
             setMessageError('Please Wait...');
-            axios.post("https://staging-bitly-be.mtechub.com/auth/verifyEmail", user)
+            axios.post(BaseUrl+"auth/verifyEmail", user)
                 .then((response) => {
                     console.log(response);
                     if (response.data.data) {

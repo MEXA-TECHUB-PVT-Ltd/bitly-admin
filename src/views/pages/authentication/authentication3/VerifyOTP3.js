@@ -10,7 +10,7 @@ import groovyWalkAnimation from "./data.json";
 
 import { fadeIn } from 'react-animations';
 import Radium, { StyleRoot } from 'radium';
-
+import { BaseUrl } from "BaseURL";
 import { useNavigate, useLocation } from 'react-router-dom';
 import mainLogo from './mainLogo.png'
 import { MuiOtpInput } from 'mui-one-time-password-input'
@@ -51,7 +51,7 @@ const VerificationCode = () => {
     if (otp === '') {
       setOTPError("OTP is Empty");
     } else {
-      axios.post("https://staging-bitly-be.mtechub.com/auth/verifyOTP", user)
+      axios.post(BaseUrl+"auth/verifyOTP", user)
         .then((response) => {
           if (response.data.result) {
             setMessage("Success");

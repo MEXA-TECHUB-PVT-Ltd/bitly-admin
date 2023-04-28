@@ -16,6 +16,7 @@ import Radium, { StyleRoot } from 'radium';
 import { fadeIn } from 'react-animations';
 import { useGoogleLogin } from '@react-oauth/google';
 import GoogleIcon from './GoogleIcon.png';
+import { BaseUrl } from "BaseURL";
 
 import mainLogo from './mainLogo.png'
 import './styles';
@@ -61,7 +62,7 @@ const Login = () => {
                         const email = {
                             email: res.data.email
                         }
-                        axios.post("https://staging-bitly-be.mtechub.com/auth/google_sign_in", email)
+                        axios.post(BaseUrl+"auth/google_sign_in", email)
                             .then((response) => {
                                 console.log(response);
                                 if (response.data.result) {
@@ -102,7 +103,7 @@ const Login = () => {
         } else if (regex.test(email) === false) {
             setEmailError("Email is not valid");
         } else if (email !== '' && password !== '') {
-            axios.post("https://staging-bitly-be.mtechub.com/auth/sign_in", user)
+            axios.post(BaseUrl+"auth/sign_in", user)
                 .then((response) => {
                     console.log(response);
                     if (response.data.result) {

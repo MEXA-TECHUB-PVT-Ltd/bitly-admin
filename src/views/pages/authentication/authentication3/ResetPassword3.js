@@ -16,7 +16,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import axios from 'axios';
 import CloseIcon from '@mui/icons-material/Close';
 import { Typography, Modal, Fade, Backdrop } from "@mui/material";
-
+import { BaseUrl } from "BaseURL";
 const ResetPassword = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -68,7 +68,7 @@ const ResetPassword = () => {
                     email: location.state.email,
                     password: password,
                 }
-                axios.post("https://staging-bitly-be.mtechub.com/auth/newPassword", user)
+                axios.post(BaseUrl+"auth/newPassword", user)
                     .then((response) => {
                         if (response.data.result) {
                             setMessage("Success");
@@ -320,7 +320,7 @@ const styles = {
 //                     password:oldPassword,
 //                     newPassword: password,
 //                 }            
-//                 axios.post("https://staging-bitly-be.mtechub.com/auth/resetPassword", user)
+//                 axios.post(BaseUrl+"auth/resetPassword", user)
 //                     .then((response) => {
 //                         if (response.data.result) {
 //                             setMessage("Success");

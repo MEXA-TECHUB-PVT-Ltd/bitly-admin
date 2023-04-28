@@ -16,6 +16,7 @@ import Lottie from "lottie-react";
 import data from "./data.json";
 import warning from "./warning.json";
 // project imports
+import { BaseUrl } from "BaseURL";
 import MainCard from 'ui-component/cards/MainCard';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 
@@ -40,7 +41,7 @@ const SamplePage = () => {
   const [PrivacyID, setPrivacyID] = useState('');
 
   const getPrivacyPolicy = () => {
-    axios.get("https://staging-bitly-be.mtechub.com/privacy_policy/view_privacy_policy")
+    axios.get(BaseUrl+"privacy_policy/view_privacy_policy")
       .then((response) => {
         if (response.data.result) {
           setPrivacyID(response.data.result[0].id);
@@ -66,7 +67,7 @@ const SamplePage = () => {
           content: updatedPrivacy,
         }
         console.log(data);
-        axios.put("https://staging-bitly-be.mtechub.com/privacy_policy/update_privacy_policy", data)
+        axios.put(BaseUrl+"privacy_policy/update_privacy_policy", data)
           .then((response) => {
             console.log(response);
             if (response.data.result) {

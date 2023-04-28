@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import axios from "axios";
-
+import { BaseUrl } from "BaseURL";
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
 import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
@@ -47,7 +47,7 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
     const theme = useTheme();
     const [linkData, setLinksData] = React.useState('');
     const getData = () => {
-        axios.get("https://staging-bitly-be.mtechub.com/links/total_links")
+        axios.get(BaseUrl+"links/total_links")
             .then((response) => {
                 if (response.data.result) {
                     setLinksData(response.data.result[0].count);
