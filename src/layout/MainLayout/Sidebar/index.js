@@ -21,11 +21,8 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
 
     const drawer = (
         <>
-            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-                <Box sx={{ display: 'flex', p: 2, mx: 'auto' }}>
-                    <LogoSection />
-                </Box>
-            </Box>
+            {/* <Box sx={{ display: { xs: 'block', md: 'none' } }}> */}
+            {/* </Box> */}
             <BrowserView>
                 <PerfectScrollbar
                     component="div"
@@ -35,6 +32,9 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                         paddingRight: '16px'
                     }}
                 >
+                    {/* <Box sx={{ display: 'flex', mx: 'auto' }}>
+                        <LogoSection />
+                    </Box> */}
                     <MenuList />
                 </PerfectScrollbar>
             </BrowserView>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Avatar, Box, ButtonBase } from '@mui/material';
+import React, { useState, useEffect } from 'react'
 
 // project imports
 import LogoSection from '../LogoSection';
@@ -15,6 +16,7 @@ import { IconMenu2 } from '@tabler/icons';
 
 const Header = ({ handleLeftDrawerToggle }) => {
     const theme = useTheme();
+    const [show, setShow] = useState(true);
 
     return (
         <>
@@ -28,9 +30,11 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     }
                 }}
             >
-                <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
-                    <LogoSection />
-                </Box>
+                {show &&
+                    <Box sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
+                        <LogoSection />
+                    </Box>
+                }
                 <ButtonBase sx={{ borderRadius: '12px', overflow: 'hidden' }}>
                     <Avatar
                         variant="rounded"
@@ -45,7 +49,11 @@ const Header = ({ handleLeftDrawerToggle }) => {
                                 color: theme.palette.secondary.light
                             }
                         }}
-                        onClick={handleLeftDrawerToggle}
+                        onClick={()=>{
+                            handleLeftDrawerToggle();
+                            setShow(!show);
+                        }
+                        }
                         color="inherit"
                     >
                         <IconMenu2 stroke={1.5} size="1.3rem" />

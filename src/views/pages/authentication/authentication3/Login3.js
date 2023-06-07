@@ -149,7 +149,7 @@ const Login = () => {
                     </Stack >
 
                     <Typography sx={{
-                        fontSize: '12px', fontWeight: '500',
+                       mt:'10px' , fontSize: '12px', fontWeight: '500',
                         color: '#032C94', cursor: 'pointer', ml: "295px"
                     }}>
                         <text color='#032C94' fontWeight={500} onClick={() => { navigate("/forgetPassword") }} >
