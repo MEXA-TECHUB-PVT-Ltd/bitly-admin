@@ -6,7 +6,8 @@ import axios from 'axios';
 import CloseIcon from '@mui/icons-material/Close';
 import { Typography, Modal, Fade, Backdrop, Avatar } from "@mui/material";
 import Lottie from "lottie-react";
-import groovyWalkAnimation from "./data.json";
+import success from "./data.json";
+import warning from "./warning.json";
 
 import { fadeIn } from 'react-animations';
 import Radium, { StyleRoot } from 'radium';
@@ -21,6 +22,8 @@ const VerificationCode = () => {
   const handleClose = () => setOpen(false);
   const [ButtonText, setButton] = useState('');
   const [message, setMessage] = useState('');
+  const [animation, setanimation] = useState('');
+
   const [messageData, setMessageData] = useState('');
   const navigate = useNavigate();
 
@@ -55,12 +58,14 @@ const VerificationCode = () => {
         .then((response) => {
           if (response.data.result) {
             setMessage("Success");
+            setanimation(success)
             setMessageData("Code Verified Successfully");
             setButton("Reset Password");
             handleOpen();
 
           } else {
             setMessage("Wrong OTP!");
+            setanimation(warning)
             setMessageData("OTP Incorrect, Please Try Again");
             setButton("Try Again");
             handleOpen();
@@ -108,7 +113,7 @@ const VerificationCode = () => {
                   <Lottie
                     align="center"
                     style={{ height: '100px', width: "150px" }}
-                    animationData={groovyWalkAnimation} />
+                    animationData={animation} />
                 </div >
                 <Typography align='center' sx={{mt:'40px'}} variant="h5" fontWeight={700}>
                   {message}</Typography>

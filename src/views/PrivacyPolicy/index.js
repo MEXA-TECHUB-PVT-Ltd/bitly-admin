@@ -102,9 +102,10 @@ const SamplePage = () => {
                 }}
             >
                 <Fade in={openCreatePrivacy}>
+                  
                     <Grid container style={{
                             borderRadius: '10px', padding: 10,
-                            height: '400px', width: '1100px', marginTop: "190px", marginLeft: '300px'
+                            height: '90%', width: '85%', marginTop: "5%", marginLeft: '20%'
                         }}
                         spacing={0} 
                         direction="row"
@@ -112,17 +113,17 @@ const SamplePage = () => {
                         justify="center" position='absolute' sx={{ align: 'center' }}  >
                         <Paper elevation={0} style={{
                             borderRadius: '10px', padding: 10,
-                            height: '400px', width: '1100px'
+                            height: '60%', width: '90%'
                         }} >
                             <Box
-                                align='right'
+                                align='left'
                                 style={{
                                     marginTop: '7px',
                                     position: 'absolute',
-                                    marginLeft: '1130px'
+                                    marginLeft: '70%'
                                 }}
                             >
-                                <Grid align='right'>
+                                <Grid align='center'>
                                     <CloseIcon style={{
                                         cursor: "pointer"
                                     }} onClick={handleCloseCreatePrivacy} />
@@ -148,7 +149,7 @@ const SamplePage = () => {
                                 rows={10}
                                 defaultValue={PrivacyPolicyContent}
                                 placeholder={PrivacyPolicyContent}
-                                sx={{ color: '#FF0000', ml: '30px', mt: '30px', width: "1020px" }}
+                                sx={{ color: '#FF0000', ml: '1%',mr: '1%', mt: '30px', width: "99%" }}
                                 required />
                             <br />
                             <Button
@@ -156,8 +157,8 @@ const SamplePage = () => {
                                     background: '#032C94',
                                     textTransform: 'none',
                                     borderRadius: '10px',
-                                    width: "280px",
-                                    ml: '450px', mt: '20px',
+                                    width: "30%",
+                                    ml: '35%', mt: '20px',
                                     height: '40px', fontSize: '16px'
                                 }}
                                 // className={classes.formHeading}

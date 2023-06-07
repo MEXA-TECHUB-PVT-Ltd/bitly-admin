@@ -5,6 +5,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import LockIcon from '@mui/icons-material/Lock';
 import { BaseUrl } from "BaseURL";
+import CardOverflow from '@mui/joy/CardOverflow';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
@@ -18,7 +20,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import CloseIcon from '@mui/icons-material/Close';
 import Lottie from "lottie-react";
-import data from "./data.json";
+import success from "./data.json";
 import warning from "./warning.json";
 
 import { useNavigate } from 'react-router-dom';
@@ -58,6 +60,7 @@ import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
 
 const ProfileSection = () => {
     const theme = useTheme();
+    const [animation, setanimation] = useState('');
     const customization = useSelector((state) => state.customization);
     const navigate = useNavigate();
     const [open1, setOpen1] = React.useState(false);
@@ -109,22 +112,25 @@ const ProfileSection = () => {
                         newPassword: password,
                     }
                     setLoading('please wait...');
-                    axios.put(BaseUrl+"auth/resetPassword", user)
+                    axios.put(BaseUrl + "auth/resetPassword", user)
                         .then((response) => {
                             setLoading('');
                             if (response.data.message === "Password Changed Successfully") {
                                 setMessage("Success");
+                                setanimation(success)
                                 setMessageData("Password Reset Successfully");
                                 handleOpen1();
                                 handleClosePasswordChange();
                             } else if (response.data.message === "Incorrect Password") {
                                 setMessageError("Error");
+                                setanimation(warning)
                                 setMessageDataError("Incorrect Password");
                                 handleOpenIncorrect();
                             }
                         })
                 } else {
                     setMessage("Alert");
+                    setanimation(warning)
                     setMessageData("Password & Confirm Password Must be Same");
                     handleOpen1();
                 }
@@ -219,7 +225,7 @@ const ProfileSection = () => {
                             <Grid sx={{ mt: '30px', ml: '200px' }} >
                                 <Lottie
                                     style={{ height: '150px', width: "150px" }}
-                                    animationData={warning} />
+                                    animationData={animation} />
                             </Grid>
                             <Typography align='center' sx={{}} variant="h5" fontWeight={700}>
                                 {messageError}</Typography>
@@ -277,9 +283,10 @@ const ProfileSection = () => {
                                 </Grid >
                             </Box>
                             <Grid sx={{ ml: '180px' }} >
+
                                 <Lottie
                                     style={{ height: '200px', width: "200px" }}
-                                    animationData={data} />
+                                    animationData={animation} />
                             </Grid>
                             <Typography align='center' sx={{}} variant="h5" fontWeight={700}>
                                 {message}</Typography>
@@ -419,7 +426,7 @@ const ProfileSection = () => {
                             <br />
                             <Button onClick={() => { handlePasswordChangeForm() }} color='primary'
                                 variant="contained" align='center'
-                                style={{ borderRadius: '15px',height: '45px', background: '#032C94', width: "420px" }}
+                                style={{ borderRadius: '15px', height: '45px', background: '#032C94', width: "420px" }}
                                 sx={{ ml: '40px', mt: '40px' }}
                             >Change Password</Button>
                         </Paper>
@@ -488,21 +495,33 @@ const ProfileSection = () => {
             >
                 {({ TransitionProps }) => (
                     <Transitions in={open} {...TransitionProps}>
-                        <Paper>
-                            <ClickAwayListener onClickAway={handleClose}>
-                                <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
-                                    <Box sx={{ p: 2 }}>
-                                        <Stack>
-                                            <Stack direction="row" spacing={0.5} alignItems="center">
-                                                <Typography variant="h4">{localStorage.getItem('username')}</Typography>
-                                                <Typography variant="subtitle2">(Admin)</Typography>
-                                            </Stack>
-                                            <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
-                                                {localStorage.getItem('email')}
-                                            </Typography>
-                                        </Stack>
-                                    </Box>
+                        <>
+                            <Paper>
+                                <ClickAwayListener onClickAway={handleClose}>
+                                    <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
                                         <Box sx={{ p: 2 }}>
+                                            <Stack>
+                                                <Typography sx={{ ml: '3%' }} >
+                                                    <Typography>
+                                                        <Typography
+                                                            sx={{ mt: '12px', ml: '12px' }} >
+                                                            <a fontWeight={700}
+                                                                style={{ fontSize: '16px', fontWeight: 'bold', color: '#032C94' }}>
+                                                                {window.localStorage.getItem('username')}
+                                                            </a>
+                                                            <a style={{ marginLeft: '2px', fontSize: '13px' }}  >
+                                                                {`       (${window.localStorage.getItem('accountType')})`}
+                                                            </a>
+                                                        </Typography>
+                                                    </Typography>
+                                                </Typography>
+                                                <Typography level="body2" sx={{ mt: '2px', ml: '20px', mb: '20px' }} >
+                                                    {window.localStorage.getItem('email')}
+                                                </Typography>
+                                                <Divider />
+                                            </Stack>
+                                        </Box>
+                                        <Box sx={{  }}>
                                             <List
                                                 component="nav"
                                                 sx={{
@@ -524,26 +543,28 @@ const ProfileSection = () => {
                                                     selected={selectedIndex === 0}
                                                     onClick={() => handleOpenPasswordChange()}
                                                 >
-                                                    <ListItemIcon>
-                                                        <IconSettings stroke={1.5} size="1.3rem" />
-                                                    </ListItemIcon>
                                                     <ListItemText primary={<Typography variant="body2">Change Password</Typography>} />
+                                                    <ListItemIcon>
+                                                        <IconSettings sx={{ color: '#032C94' }} />
+                                                    </ListItemIcon>
                                                 </ListItemButton>
                                                 <ListItemButton
                                                     sx={{ borderRadius: `${customization.borderRadius}px` }}
                                                     selected={selectedIndex === 4}
                                                     onClick={handleLogout}
                                                 >
-                                                    <ListItemIcon>
-                                                        <IconLogout stroke={1.5} size="1.3rem" />
-                                                    </ListItemIcon>
                                                     <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
+                                                    <ListItemIcon>
+                                                    <LogoutIcon sx={{ color: '#032C94' }} />
+                                                    </ListItemIcon>
+
                                                 </ListItemButton>
                                             </List>
                                         </Box>
-                                </MainCard>
-                            </ClickAwayListener>
-                        </Paper>
+                                    </MainCard>
+                                </ClickAwayListener>
+                            </Paper>
+                        </>
                     </Transitions>
                 )}
             </Popper>
